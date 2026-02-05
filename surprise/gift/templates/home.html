@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine? 💕</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="floating-hearts" id="floatingHearts"></div>
+    <audio id="bg-music" autoplay loop>
+        <source src="{% static 'music/RiverFlowsInYou.flac' %}" type="audio/flac">
+        Your browser does not support the audio element.
+    </audio>
+    <div class="card-container">
+        <div class="bear-section">
+            <div class="circle-bg">
+                <div class="hearts-circle">
+                    <div class="heart heart-1"></div>
+                    <div class="heart heart-2"></div>
+                    <div class="heart heart-3"></div>
+                    <div class="heart heart-4"></div>
+                    <div class="heart heart-5"></div>
+                    <div class="heart heart-6"></div>
+                    <div class="heart heart-7"></div>
+                    <div class="heart heart-8"></div>
+                </div>
+                
+                <!-- Replace 'bear.gif' with your GIF filename -->
+                <img src="{% static 'images/bearhug.gif' %}" alt="Cute Animation" class="bear-gif" />
+            </div>
+        </div>
+
+        <div class="question-box">
+            <p class="question">Will you be my valentine</p>
+        </div>
+
+        <div class="buttons">
+            <button class="btn btn-yes" onclick="handleYes()">
+                <span>YES</span>
+            </button>
+            <button class="btn btn-no" onclick="handleNo()">
+                <span>NO</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="response-message" id="responseMessage"></div>
+
+    <!-- Heartfelt Message Page -->
+    <div id="heartfeltPage" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 100%); z-index: 3000; overflow-y: auto; padding: 40px 20px;">
+        <div style="max-width: 700px; margin: 0 auto; background: white; border-radius: 30px; padding: 60px 50px; box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15); animation: slideIn 0.8s ease-out;">
+            <h1 style="font-size: 48px; color: #ff1744; text-align: center; margin-bottom: 40px; animation: bounce 1s ease-in-out infinite;">
+                💕 You Said Yes! 💕
+            </h1>
+            
+            <div style="text-align: left;">
+                <p style="font-size: 19px; line-height: 1.9; color: #333; margin-bottom: 20px;">
+                    Happy Valentine's day to you.
+                </p>
+                <p style="font-size: 19px; line-height: 1.9; color: #333; margin-bottom: 20px;">
+                    I hope you know how special you are to me even when I'm purposely getting on your nerves, stealing your attention, or doing that thing you told me not to do(you know exactly what I mean😏).
+                </p>
+                <p style="font-size: 19px; line-height: 1.9; color: #333; margin-bottom: 20px;">
+                    I love you for your smile and yh when you laugh and the faces you make when I'm annoying you(them side-eyes) and for who you are.
+                <p style="font-size: 19px; line-height: 1.9; color: #333; margin-bottom: 20px;">
+                    I'll keep teasing you, bothering you,and stealing your attention whenever I can, that's just how I show how much you mean to me.
+                </p>
+                <p style="font-size: 22px; line-height: 1.9; color: #ff1744; font-weight: bold; text-align: center; margin: 35px 0 25px 0;">
+                Love you💖
+                </p>
+                <p style="font-size: 19px; line-height: 1.9; color: #333; text-align: center; margin-top: 20px;">
+                    Thank you for being mine. Here's to us, and to all the beautiful moments yet to come.
+                </p>
+            </div>
+
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="font-size: 60px; margin: 20px 0;">🎉💖🎉</p>
+                <button onclick="showFinalPage()" style="padding: 20px 60px; font-size: 22px; font-weight: bold; background: linear-gradient(135deg, #ff4757 0%, #ff1744 100%); color: white; border: none; border-radius: 50px; cursor: pointer; box-shadow: 0 6px 20px rgba(255, 23, 68, 0.4); transition: all 0.3s ease; margin-top: 20px;">
+                    Next ➜
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final Valentine's Page -->
+    <div id="finalPage" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%); z-index: 4000; overflow-y: auto; padding: 40px 20px;">
+        <div style="max-width: 600px; margin: 0 auto; background: white; border-radius: 30px; padding: 60px 50px; box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2); text-align: center; animation: slideIn 0.8s ease-out;">
+            <h1 style="font-size: 48px; color: #ff1744; margin-bottom: 30px; animation: bounce 1s ease-in-out infinite;">
+                Happy Valentine's Day! 💝
+            </h1>
+            
+            <div style="margin: 40px 0; position: relative;">
+                <!-- Replace 'her-photo.jpg' with the actual filename of your image -->
+                <img id="mybaby" src="{% static 'images/mybaby.jpg' %}" alt="My baby" style="width: 300px; height: 300px; object-fit: cover; border-radius: 20px; margin: 0 auto; box-shadow: 0 10px 40px rgba(255, 23, 68, 0.3); border: 5px solid #ff69b4; display: block;" />
+            </div>
+
+            <div style="margin-top: 40px;">
+                <p style="font-size: 24px; color: #333; line-height: 1.8; margin-bottom: 20px;">
+                    To the most amazing person in my life...
+                </p>
+                <p style="font-size: 20px; color: #666; line-height: 1.7; font-style: italic;">
+                    You are my sunshine, my heart, my everything. 
+                    Happy Valentine's Day, my love! 
+                </p>
+                <div style="font-size: 50px; margin-top: 30px;">
+                    ❤️💕💖💝💗
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
