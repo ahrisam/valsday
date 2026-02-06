@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
+    {% csrf_token %}
     <div class="floating-hearts" id="floatingHearts"></div>
     <audio id="bg-music" autoplay loop>
         <source src="{% static 'music/RiverFlowsInYou.flac' %}" type="audio/flac">

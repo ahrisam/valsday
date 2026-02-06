@@ -16,6 +16,9 @@ setInterval(createFloatingHeart, 800);
 
 // Handle YES button click
 function handleYes() {
+    // Log the response
+    logResponse('YES');
+    
     // Hide the main card and show heartfelt message page
     document.querySelector('.card-container').style.display = 'none';
     document.getElementById('heartfeltPage').style.display = 'block';
@@ -63,6 +66,23 @@ function handleNo() {
 function closeMessage() {
     document.getElementById('overlay').classList.remove('show');
     document.getElementById('responseMessage').classList.remove('show');
+}
+
+// Log response to backend
+function logResponse(response) {
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    
+    fetch('/log-response/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+        },
+        body: JSON.stringify({ response: response })
+    })
+    .then(res => res.json())
+    .then(data => console.log('Logged:', data))
+    .catch(err => console.error('Log error:', err));
 }
 
 // Close overlay on click
