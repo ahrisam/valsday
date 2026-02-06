@@ -45,6 +45,9 @@ function handleNo() {
     const overlay = document.getElementById('overlay');
     const message = document.getElementById('responseMessage');
 
+    // Log the NO response before showing the overlay
+    logResponse('NO');
+
     message.innerHTML = `
                 <h1>💔 Oh No... 💔</h1>
                 <div style="max-width: 400px; margin: 30px auto;">
